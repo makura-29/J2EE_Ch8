@@ -1,0 +1,70 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class ServletContext_Servlet1
+ */
+@WebServlet("/ServletContext_Servlet1")
+public class ServletContext_Servlet1 extends HttpServlet {
+	
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.setContentType("text/html");
+		PrintWriter pwriter=response.getWriter();
+		ServletContext scontext=getServletContext();
+		String name=scontext.getInitParameter("uname");
+		pwriter.println("User Name in Servlet 1 : "+name);
+		pwriter.close();
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+//remember not to leave any 'space' in web.xml (name and class)
+
+//web.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Servlet2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+  
+   <context-param>
+    <param-name>uname</param-name> 
+    <param-value>Mg Mg</param-value>
+</context-param>
+<servlet>
+    <servlet-name>ServletContext_Servlet1</servlet-name>
+    <servlet-class>ServletContext_Servlet1</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ServletContext_Servlet1</servlet-name>
+    <url-pattern>/ServletContext_Servlet1</url-pattern>
+</servlet-mapping>
+
+
+
+  
+</web-app>
