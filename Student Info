@@ -1,0 +1,78 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/StudentInfo")
+public class StudentInfo extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.setContentType("text/html");
+		PrintWriter out=response.getWriter();
+		out.println("<ul>\n" + 
+	              "<li>Roll No. : " + request.getParameter("rollno") + "</li>\n" +
+	              "<li>Name : " + request.getParameter("name") + "</li>\n" +
+	              "<li>Email : " + request.getParameter("email") + "</li>\n" +
+	              "</ul>");
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+
+//html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<FORM ACTION = "/Servlet2/StudentInfo" METHOD = "POST">
+
+Roll No. : <INPUT TYPE = "TEXT" NAME = "rollno"><BR>  
+Name : <INPUT TYPE = "TEXT" NAME = "name"><BR>  
+Email : <INPUT TYPE = "TEXT" NAME = "email"><BR>
+
+<CENTER>
+<INPUT TYPE="SUBMIT" VALUE="SUBMIT INFO">
+</CENTER>
+</FORM>
+</body>
+</html>
+
+//web.xml
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Servlet2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+  
+    <servlet>
+        <servlet-name>StudentInfo</servlet-name>
+        <servlet-class>StudentInfo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentInfo</servlet-name>
+        <url-pattern>/StudentInfo</url-pattern>
+    </servlet-mapping>
+
+  
+</web-app>
