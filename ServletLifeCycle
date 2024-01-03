@@ -1,0 +1,34 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/ServletLifeCycle")
+public class ServletLifeCycle extends HttpServlet {
+	private String message = "";
+	public ServletLifeCycle() {
+		super();  // TODO Auto-generated constructor stub
+	}
+	public void init() throws ServletException {
+		message = "UCSY";  // Do required initialization
+	}
+
+	protected void doGet(HttpServletRequest  request, HttpServletResponse  response)
+	         throws ServletException, IOException  {
+
+		response.setContentType("text/html"); // Set response content type
+		PrintWriter out = response.getWriter();
+		out.println("<h1>" + "Hello " + message + "</h1>");
+	}
+
+	public void destroy() {
+
+		System.out.println("This is Destroy methods");
+	}
+	
+}
